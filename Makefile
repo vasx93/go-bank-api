@@ -15,4 +15,12 @@ migrateup:
 migratedown:
 	migrate -path internal/db/migration -database "postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@localhost:5432/${DB_NAME}?sslmode=disable" --verbose down
 
-.PHONY: createdb dropdb migrateup migratedown
+
+run:
+	go run cmd/app/main.go
+
+format:
+	go fmt ./...
+
+
+.PHONY: createdb dropdb migrateup migratedown run
