@@ -22,3 +22,17 @@ docker exec -it containerID psql -U root bank(db name)
 1. createdb --username=root --owner=root bank(db name)
 2. psql bank
 3. dropdb bank
+
+## Structure
+
+https://github.com/khannedy/golang-clean-architecture/tree/main -- investigate this
+
+1. Folder "?" will be responsible for http traffic
+
+- package route will register route groups and handlers
+
+- register endpoints, setup groups and register handlers
+
+2. Package "?" is responsible for:
+
+- receiving http request, marshal/unmarshal json, validate and bindjson into

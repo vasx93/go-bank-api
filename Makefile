@@ -19,6 +19,9 @@ migratedown:
 run:
 	go run cmd/app/main.go
 
+build:
+	go build -o build/bank ./cmd/app
+
 format:
 	go fmt ./...
 

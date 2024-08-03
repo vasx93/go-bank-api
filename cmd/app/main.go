@@ -15,6 +15,11 @@ func main() {
 
 	dbType := os.Getenv("DB_TYPE")
 	dbURI := os.Getenv("DB_URI")
+	port := os.Getenv("PORT")
+
+	if port == "" {
+		port = "5000"
+	}
 
 	db, err := db.NewDBFactory(dbType, dbURI)
 
@@ -24,6 +29,6 @@ func main() {
 
 	log.Print("db", db)
 
-	http.ListenAndServe(":5000", nil)
+	http.ListenAndServe(":"+port, nil)
 
 }
