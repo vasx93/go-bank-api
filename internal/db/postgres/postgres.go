@@ -2,8 +2,8 @@ package postgres
 
 import (
 	"database/sql"
-	"fmt"
 	"log"
+	"os"
 
 	_ "github.com/lib/pq"
 )
@@ -12,9 +12,9 @@ type PostgresDB struct {
 	db *sql.DB
 }
 
-func NewPostgresDB(dsn string) *PostgresDB {
+func NewPostgresDB() (*PostgresDB, error) {
 
-	fmt.Println("dsn ", dsn)
+	dsn := os.Getenv("POSTGRES_DSN")
 
 	db, err := sql.Open("postgres", dsn)
 	if err != nil {
@@ -25,7 +25,11 @@ func NewPostgresDB(dsn string) *PostgresDB {
 		log.Fatal("No response from db")
 	}
 
-	return &PostgresDB{db: db}
+	return &PostgresDB{db: db}, nil
+}
+
+func (p *PostgresDB) Close() error {
+	return p.db.Close()
 }
 
 func (s *PostgresDB) Create() {

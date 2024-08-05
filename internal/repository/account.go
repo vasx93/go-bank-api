@@ -1,20 +1,27 @@
 package repository
 
+import (
+	db "github.com/vasx93/go-bank-api/internal/db"
+	"github.com/vasx93/go-bank-api/internal/db/postgres"
+)
+
 //! READ THIS https://github.com/amitshekhariitbhu/go-backend-clean-architecture/blob/main/repository/user_repository.go
-// import (
-// 	"database/sql"
-// 	"fmt"
 
-// 	db "github.com/vasx93/go-bank-api/internal/db"
-// )
-
-// type AccountRepository struct {
-// 	storage *sql.DB
+// type AccountRepository interface {
+// 	CreateAccount(account Account) error
+// 	GetAccount(id string) (Account, error)
+// 	UpdateAccount(account Account) error
+// 	DeleteAccount(id string) error
+// 	ListAccounts() ([]Account, error)
 // }
 
-// func New(s *sql.DB) *AccountRepository {
-// 	return &AccountRepository{storage: s}
-// }
+type AccountRepository struct {
+*postgres.PostgresDB
+}
+
+func New(p db.DbConnection) *AccountRepository {
+	return &PostgresAccountRepository{p}
+}
 
 // func (a *AccountRepository) Find() ([]db.Account, error) {
 // 	query := `SELECT * FROM accounts`

@@ -12,16 +12,13 @@ import (
 func main() {
 
 	config.LoadEnv()
-
-	dbType := os.Getenv("DB_TYPE")
-	dbURI := os.Getenv("DB_URI")
 	port := os.Getenv("PORT")
 
 	if port == "" {
 		port = "5000"
 	}
 
-	db, err := db.NewDBFactory(dbType, dbURI)
+	db, err := db.NewDBFactory()
 
 	if err != nil {
 		log.Fatal(err)
